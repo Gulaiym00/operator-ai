@@ -16,6 +16,9 @@ import "./config/authGoogle";
 import passport from "passport";
 export const creatApi = () => {
   const app = express();
+  // Render/Vercel sit behind a reverse proxy — needed for correct req.ip
+  // and for Express to recognize the connection as secure (X-Forwarded-Proto)
+  app.set("trust proxy", 1);
   app.use(
     cors({
       origin: process.env.FRONTEND_URL,

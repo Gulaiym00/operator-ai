@@ -10,6 +10,7 @@ import {
   updateProfileService,
 } from "../services/auth.service";
 import { access_secret } from "../utils/generateToken";
+import { refreshCookieOptions } from "../utils/cookies";
 
 export const registerController = async (
   req: Request<
@@ -54,10 +55,7 @@ export const loginController = async (
   try {
     const body = req.body;
     const { user, token } = await loginService(body);
-    res.cookie("refreshToken", token.refreshToken, {
-      httpOnly: true,
-      secure: false,
-    });
+    res.cookie("refreshToken", token.refreshToken, refreshCookieOptions);
     res.status(200).json({
       message: "Loggined successfully",
       user: {
@@ -77,10 +75,7 @@ export const refreshController = async (
   try {
     const token = req.cookies.refreshToken;
     const result = await refreshService(token);
-    res.cookie("refreshToken", result.refreshToken, {
-      httpOnly: true,
-      secure: false,
-    });
+    res.cookie("refreshToken", result.refreshToken, refreshCookieOptions);
     res.status(200).json({
       message: "Refresh successfully done",
       token: result.accessToken,
@@ -166,7 +161,8 @@ export const logoutController = async (
 ) => {
   try {
     const token = req.cookies.refreshToken;
-    const result = await logoutService(token);
+    await logoutService(token);
+    res.clearCookie("refreshToken", refreshCookieOptions);
 
     res.status(200).json({
       message: "Logouted",

@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { googleLoginService } from "../services/auth.service";
+import { refreshCookieOptions } from "../utils/cookies";
 
 const frontendUrl = process.env.FRONTEND_URL as string;
 
@@ -19,10 +20,7 @@ export const googleCallback = async (
 
     const tokens = await googleLoginService(user);
 
-    res.cookie("refreshToken", tokens.refreshToken, {
-      httpOnly: true,
-      secure: false,
-    });
+    res.cookie("refreshToken", tokens.refreshToken, refreshCookieOptions);
     return res.redirect(
       `${frontendUrl}/google_success?accessToken=${tokens.accessToken}`,
     );

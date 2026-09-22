@@ -1,11 +1,15 @@
 import { Pool } from "pg";
 
+// managed Postgres providers (Supabase, Neon, ...) require SSL and use
+// certs not in Node's default trust store — DB_SSL=true opts in without
+// touching local dev, which talks to a plain local Postgres
 export const pool = new Pool({
   database: process.env.DB_NAME,
   host: process.env.DB_HOST,
   port: process.env.DB_PORT ? Number(process.env.DB_PORT) : 5432,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
+  ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: false } : undefined,
 });
 
 pool

@@ -69,9 +69,11 @@ npm run build            # production build
 
 | Variable | Purpose |
 |---|---|
+| `NODE_ENV` | set to `production` when deployed — switches the refresh-token cookie to `secure` + `sameSite=none` for cross-site (frontend/backend on different domains) |
 | `PORT` | API port (default 5000) |
 | `FRONTEND_URL` | used for CORS + OAuth/reset-link redirects |
 | `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, `DB_PASSWORD` | Postgres connection |
+| `DB_SSL` | set to `true` when `DB_HOST` is a managed provider (Supabase, Neon, ...) that requires SSL |
 | `JWT_ACCESS_SECRET`, `JWT_REFRESH_SECRET` | JWT signing secrets |
 | `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `GOOGLE_CALLBACK_URL` | Google OAuth (Gmail/Calendar/Drive) |
 | `GEMINI_API_KEY` | Google Gemini API key for the chat AI |
@@ -82,6 +84,13 @@ npm run build            # production build
 | Variable | Purpose |
 |---|---|
 | `NEXT_PUBLIC_API_URL` | base URL of the backend API |
+
+## Deployment
+
+- **Database**: managed Postgres (Supabase/Neon) — set `DB_*` + `DB_SSL=true`.
+- **Backend**: any Node host (Render, Railway, ...) — build with `npm run build`, run with `npm run start`, set `NODE_ENV=production` plus all vars above.
+- **Frontend**: Vercel — root directory `frontend`, set `NEXT_PUBLIC_API_URL` to the deployed backend's URL.
+- Remember to update `GOOGLE_CALLBACK_URL` (backend env) and the authorized redirect URI in Google Cloud Console to the deployed backend's `/auth/google-callback` URL, and `FRONTEND_URL` (backend env) to the deployed frontend's URL.
 
 ## Notes
 
