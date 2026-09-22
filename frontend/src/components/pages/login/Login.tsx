@@ -44,9 +44,16 @@ const Login = () => {
       title="Sign in to Operator AI"
       subtitle="Enter your details to pick up right where you left off."
     >
-      <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form
+        className="flex flex-col gap-4"
+        onSubmit={handleSubmit(onSubmit)}
+        noValidate
+      >
         <div className="flex flex-col gap-1.5">
-          <label htmlFor="email" className="text-sm font-medium text-foreground">
+          <label
+            htmlFor="email"
+            className="text-sm font-medium text-foreground"
+          >
             Email
           </label>
           <Input
@@ -57,13 +64,18 @@ const Login = () => {
             {...register("email", { required: "Email is required" })}
           />
           {errors.email && (
-            <span className="text-xs text-destructive">{errors.email.message}</span>
+            <span className="text-xs text-destructive">
+              {errors.email.message}
+            </span>
           )}
         </div>
 
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center justify-between">
-            <label htmlFor="password" className="text-sm font-medium text-foreground">
+            <label
+              htmlFor="password"
+              className="text-sm font-medium text-foreground"
+            >
               Password
             </label>
             <Link
@@ -81,17 +93,25 @@ const Login = () => {
             {...register("password", { required: "Password is required" })}
           />
           {errors.password && (
-            <span className="text-xs text-destructive">{errors.password.message}</span>
+            <span className="text-xs text-destructive">
+              {errors.password.message}
+            </span>
           )}
         </div>
 
         {error && (
           <p className="text-sm text-destructive">
-            {error.response?.data?.message || "Something went wrong. Please try again."}
+            {error.response?.data?.message ||
+              "Something went wrong. Please try again."}
           </p>
         )}
 
-        <Button type="submit" size="lg" className="mt-1 w-full" disabled={isPending}>
+        <Button
+          type="submit"
+          size="lg"
+          className="mt-1 w-full"
+          disabled={isPending}
+        >
           {isPending ? "Signing in..." : "Sign in"}
         </Button>
       </form>
@@ -112,7 +132,10 @@ const Login = () => {
 
       <p className="mt-6 text-center text-sm text-muted-foreground">
         Don't have an account?{" "}
-        <Link href="/register" className="font-medium text-foreground hover:underline">
+        <Link
+          href="/register"
+          className="font-medium text-foreground hover:underline"
+        >
           Create account
         </Link>
       </p>
