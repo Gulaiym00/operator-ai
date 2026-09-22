@@ -83,6 +83,7 @@ export const loginService = async (body: ILoginBody) => {
       id: res.rows[0].id,
       avatar: res.rows[0].avatar,
       name: res.rows[0].name,
+      is_admin: res.rows[0].is_admin,
     },
     token: tokens,
   };
