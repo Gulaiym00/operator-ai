@@ -1,0 +1,651 @@
+#chatAI {
+  width: 100%;
+  height: calc(100vh - 64px);
+  height: calc(100dvh - 64px);
+  min-height: 600px;
+}
+
+.chat {
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  overflow: hidden;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+  height: 64px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 18px;
+
+  border-bottom: 1px solid #e4e4e7;
+
+  background: #ffffff;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  h1 {
+    margin: 0 0 3px;
+
+    color: #18181b;
+
+    font-size: 20px;
+    font-weight: 650;
+    line-height: 1.2;
+  }
+}
+
+.aiIcon {
+  width: 36px;
+  height: 36px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #18181b;
+  color: #ffffff;
+}
+
+.status {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  color: #9999a1;
+
+  font-size: 13px;
+  line-height: 1;
+
+  span {
+    width: 6px;
+    height: 6px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #8a8a91;
+  }
+}
+
+/* =========================
+   NEW CHAT
+========================= */
+
+.newChat {
+  height: 33px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  padding: 0 10px;
+
+  border: 1px solid #e4e4e7;
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #52525b;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
+
+  &:hover:not(:disabled) {
+    background: #f7f7f8;
+    border-color: #d4d4d8;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* =========================
+   BODY
+========================= */
+
+.body {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+
+  background: #fcfcfc;
+
+  scrollbar-width: thin;
+  scrollbar-color: #d4d4d8 transparent;
+}
+
+.messages {
+  width: 100%;
+  max-width: 850px;
+
+  margin: 0 auto;
+
+  padding: 28px 25px 30px;
+}
+
+/* =========================
+   MESSAGE ROW
+========================= */
+
+.messageRow {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  margin-bottom: 24px;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.aiRow {
+  flex-direction: row;
+}
+
+.userRow {
+  flex-direction: row-reverse;
+}
+
+/* =========================
+   AVATAR
+========================= */
+
+.avatar {
+  width: 30px;
+  height: 30px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+}
+
+.aiAvatar {
+  background: #18181b;
+  color: #ffffff;
+}
+
+.userAvatar {
+  background: #e4e4e7;
+  color: #52525b;
+}
+
+/* =========================
+   MESSAGE CONTENT
+========================= */
+
+.messageContent {
+  max-width: 75%;
+
+  min-width: 0;
+}
+
+.userRow .messageContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* =========================
+   MESSAGE TOP
+========================= */
+
+.messageTop {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 5px;
+
+  strong {
+    color: #3f3f46;
+
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  span {
+    color: #a1a1aa;
+
+    font-size: 10px;
+    font-weight: 400;
+  }
+}
+
+/* =========================
+   BUBBLE
+========================= */
+
+.bubble {
+  padding: 10px 12px;
+
+  border: 1px solid #e4e4e7;
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  color: #52525b;
+
+  font-size: 14px;
+  line-height: 1.6;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.userRow .bubble {
+  border-color: #e8e8e9;
+
+  background: #f1f1f2;
+
+  color: #3f3f46;
+}
+
+/* =========================
+   COPY
+========================= */
+
+.copyButton {
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+
+  margin-top: 5px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #a1a1aa;
+
+  font-family: inherit;
+  font-size: 11px;
+
+  cursor: pointer;
+
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: #52525b;
+  }
+}
+
+/* =========================
+   TYPING
+========================= */
+
+.typing {
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+
+  width: 48px;
+
+  padding: 12px;
+}
+
+.typing span {
+  width: 4px;
+  height: 4px;
+
+  border-radius: 50%;
+
+  background: #a1a1aa;
+
+  animation: typing 1.2s infinite ease-in-out;
+
+  &:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  &:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+}
+
+@keyframes typing {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+
+  30% {
+    transform: translateY(-3px);
+  }
+}
+
+/* =========================
+   INPUT AREA
+========================= */
+
+.inputArea {
+  flex-shrink: 0;
+
+  padding: 13px 20px 11px;
+
+  border-top: 1px solid #e4e4e7;
+
+  background: #ffffff;
+}
+
+.inputWrapper {
+  width: 100%;
+  max-width: 850px;
+
+  min-height: 46px;
+
+  display: flex;
+  align-items: flex-end;
+
+  gap: 7px;
+
+  margin: 0 auto;
+
+  padding: 6px 7px 6px 10px;
+
+  border: 1px solid #dcdcdf;
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  transition: border-color 0.15s ease;
+
+  &:focus-within {
+    border-color: #a1a1aa;
+  }
+
+  textarea {
+    flex: 1;
+
+    min-width: 0;
+    min-height: 30px;
+    max-height: 130px;
+
+    resize: none;
+
+    padding: 7px 2px;
+
+    border: 0;
+    outline: 0;
+
+    background: transparent;
+
+    color: #27272a;
+
+    font-family: inherit;
+    font-size: 14px;
+    line-height: 1.5;
+
+    &::placeholder {
+      color: #a1a1aa;
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+}
+
+/* =========================
+   SEND
+========================= */
+
+.send {
+  width: 31px;
+  height: 31px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  border-radius: 7px;
+
+  font-family: inherit;
+  background: #eeeeef;
+
+  color: #a1a1aa;
+
+  cursor: default;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+
+  &.sendActive {
+    background: #18181b;
+    color: #ffffff;
+
+    cursor: pointer;
+
+    &:hover {
+      background: #27272a;
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+/* =========================
+   HINT
+========================= */
+
+.hint {
+  max-width: 850px;
+
+  margin: 6px auto 0;
+
+  color: #b0b0b6;
+
+  font-size: 10px;
+
+  text-align: center;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+  #chatAI {
+    height: calc(100vh - 50px);
+    height: calc(100dvh - 50px);
+
+    min-height: 500px;
+  }
+
+  .chat {
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
+  .header {
+    padding: 0 12px;
+  }
+
+  .headerLeft {
+    gap: 9px;
+
+    h1 {
+      font-size: 17px;
+    }
+  }
+
+  .aiIcon {
+    width: 32px;
+    height: 32px;
+
+    border-radius: 8px;
+  }
+
+  .status {
+    font-size: 11px;
+  }
+
+  .messages {
+    padding: 20px 14px;
+  }
+
+  .messageRow {
+    gap: 8px;
+
+    margin-bottom: 20px;
+  }
+
+  .avatar {
+    width: 28px;
+    height: 28px;
+
+    border-radius: 7px;
+  }
+
+  .messageContent {
+    max-width: 82%;
+  }
+
+  .messageTop {
+    strong {
+      font-size: 12px;
+    }
+
+    span {
+      font-size: 9px;
+    }
+  }
+
+  .bubble {
+    padding: 9px 11px;
+
+    font-size: 13px;
+  }
+
+  .inputArea {
+    padding: 10px 10px 8px;
+  }
+
+  .inputWrapper {
+    min-height: 44px;
+
+    padding: 5px 6px 5px 8px;
+  }
+
+  .hint {
+    display: none;
+  }
+
+  .newChat {
+    width: 33px;
+
+    padding: 0;
+
+    justify-content: center;
+
+    font-size: 0;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 420px) {
+  .messages {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .messageContent {
+    max-width: 86%;
+  }
+
+  .messageRow {
+    gap: 7px;
+  }
+
+  .avatar {
+    width: 26px;
+    height: 26px;
+  }
+
+  .bubble {
+    font-size: 12.5px;
+  }
+
+  .copyButton {
+    font-size: 10px;
+  }
+}
+
+.loadingState {
+  padding: 8px 0;
+
+  color: #a1a1aa;
+
+  font-size: 12px;
+  text-align: center;
+}
+
+.noReply {
+  margin: 6px 2px 0;
+
+  color: #a1a1aa;
+
+  font-size: 11px;
+}
