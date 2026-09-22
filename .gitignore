@@ -19,6 +19,7 @@ frontend/*.tsbuildinfo
 frontend/next-env.d.ts
 
 # misc
+.claude/scheduled_tasks.lock
 .DS_Store
 *.pem
 npm-debug.log*
